@@ -68,6 +68,11 @@ public class ExceptionCrashHandler implements Thread.UncaughtExceptionHandler {
         DefaultUncaughtExceptionHandler.uncaughtException(thread, ex);
     }
 
+    public File getCrashFile(){
+        String crashFileName = mContext.getSharedPreferences("crash",Context.MODE_PRIVATE).getString("CRASH_FILE_NAME","");
+        return new File(crashFileName);
+    }
+
     private void cacheCrashFile(String fileName) {
         SharedPreferences sp = mContext.getSharedPreferences("crash", Context.MODE_PRIVATE);
         sp.edit().putString("CRASH_FILE_NAME", fileName).commit();
