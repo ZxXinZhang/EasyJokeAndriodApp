@@ -1,9 +1,12 @@
 package com.example.xinzhang.easyjoke;
 
 import android.os.Environment;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v4.media.session.IMediaControllerCallback;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 
 import base.ExceptionCrashHandler;
+import fixBug.FixDexManager;
 
 
 public class MainActivity extends BaseSkinActivity {
@@ -26,15 +30,35 @@ public class MainActivity extends BaseSkinActivity {
     private TextView mTestTv;
     @ViewById(R.id.test_iv)
     private ImageView mTestIv;
+
     @Override
     protected void initData() {
-        //get information pf the last crash exception and upload it to server
-        File crashFile = ExceptionCrashHandler.getmInstance().getCrashFile();
-        if(crashFile.exists()){
-            //upload it to server
+        fixDexBug();
+        //fixBug();
+    }
 
+    private void fixDexBug() {
+        File fixFile = new File(Environment.getExternalStorageDirectory(),"fix.dex");
+        if(fixFile.exists()){
+            FixDexManager fixDexManager = new FixDexManager(this);
+            try {
+                fixDexManager.fixDex(fixFile.getAbsolutePath());
+                Toast.makeText(this, "fixed successfully", Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                Toast.makeText(this, "failed to fix bug", Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
         }
-        //fix bug
+    }
+
+    private void fixBug() {
+        //get information pf the last crash exception and upload it to server
+//        File crashFile = ExceptionCrashHandler.getmInstance().getCrashFile();
+//        if(crashFile.exists()){
+//            //upload it to server
+//
+//        }
+//        fix bug
         File fixFile = new File(Environment.getExternalStorageDirectory(),"fix.apatch");
         if(fixFile.exists()){
             try {
@@ -60,7 +84,6 @@ public class MainActivity extends BaseSkinActivity {
     @Override
     protected void setContentView() {
         setContentView(R.layout.activity_main);
-        startActivity(MainActivity.class);
 
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.example.xinzhang.baselibrary.ioc.ViewById;
@@ -46,6 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected void startActivity(Class<?> clazz){
         Intent intent = new Intent(this, clazz);
         startActivity(intent);
+
     }
 
     /**
