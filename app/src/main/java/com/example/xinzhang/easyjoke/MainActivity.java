@@ -17,6 +17,7 @@ import com.example.xinzhang.baselibrary.ioc.OnClick;
 import com.example.xinzhang.baselibrary.ioc.ViewById;
 import com.example.xinzhang.baselibrary.ioc.ViewUtils;
 import com.example.xinzhang.framelibrary.BaseSkinActivity;
+import com.example.xinzhang.framelibrary.DefaultNavigationBar;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,7 +79,7 @@ public class MainActivity extends BaseSkinActivity {
 
     @Override
     protected void initTitle() {
-
+        DefaultNavigationBar navigationBar = new DefaultNavigationBar.Builder(this).setTitle("加油").setRightText("zx").build();
     }
 
     @Override
