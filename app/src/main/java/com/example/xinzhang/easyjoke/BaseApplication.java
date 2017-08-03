@@ -8,6 +8,8 @@ import com.alipay.euler.andfix.patch.PatchManager;
 
 import base.ExceptionCrashHandler;
 import fixBug.FixDexManager;
+import http.HttpUtils;
+import http.OkHttpEngine;
 
 /**
  * Created by xinzhang on 7/5/17.
@@ -20,6 +22,9 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        HttpUtils.init(new OkHttpEngine());
+
 //        ExceptionCrashHandler.getmInstance().init(this);
 //        //AndFix is a library that offers hot-fix for Android App from alibaba
 //        mPatchManager = new PatchManager(this);

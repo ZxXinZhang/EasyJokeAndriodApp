@@ -30,9 +30,6 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
         //bind parameters
         setText(R.id.title, getParams().mTitle);
         setText(R.id.right_text,getParams().mRightText);
-
-        TextView tx = findViewById(R.id.right_text);
-        Log.e(TAG, "applyView: " + tx.getText());
         setOnClickListener(R.id.right_text, getParams().mRightClickListener);
         //default: end Activity on the left
         setOnClickListener(R.id.back, getParams().mLeftClickListener);
@@ -68,7 +65,6 @@ public class DefaultNavigationBar extends AbsNavigationBar<DefaultNavigationBar.
 
         public Builder setRightText(String text){
             P.mRightText = text;
-            Log.e(TAG, "setRightText: ");
             return this;
         }
 

@@ -16,17 +16,23 @@ import com.example.xinzhang.baselibrary.ioc.CheckNet;
 import com.example.xinzhang.baselibrary.ioc.OnClick;
 import com.example.xinzhang.baselibrary.ioc.ViewById;
 import com.example.xinzhang.baselibrary.ioc.ViewUtils;
+import com.example.xinzhang.easyjoke.mode.DiscoverListResult;
 import com.example.xinzhang.framelibrary.BaseSkinActivity;
 import com.example.xinzhang.framelibrary.DefaultNavigationBar;
+import com.example.xinzhang.framelibrary.HttpCallBack;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
 
 import base.ExceptionCrashHandler;
 import fixBug.FixDexManager;
+import http.HttpUtils;
+import http.OkHttpEngine;
 
 
 public class MainActivity extends BaseSkinActivity {
+    private static final String TAG = "http";
     @ViewById(R.id.test_tv)
     private TextView mTestTv;
     @ViewById(R.id.test_iv)
@@ -36,6 +42,21 @@ public class MainActivity extends BaseSkinActivity {
     protected void initData() {
         fixDexBug();
         //fixBug();
+        HttpUtils.with(this).url("http://is.snssdk.com/2/essay/discovery/v3/").addParams("iid", "6152551759").addParams("aid", "7")
+                .execute(new HttpCallBack<DiscoverListResult>() {
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(DiscoverListResult result) {
+
+                        // String -> Gson Object
+
+                    }
+                });
+
     }
 
     private void fixDexBug() {
